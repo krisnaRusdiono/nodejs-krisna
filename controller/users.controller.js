@@ -1,3 +1,6 @@
+const createError = require('http-errors');
+const UserModel = require('../db/user.model');
+
 module.exports = {
     base: async (req, res, next) => {
         try {
@@ -8,35 +11,57 @@ module.exports = {
     },
     getAllUser: async (req, res, next) => {
         try {
-            res.send('this should send all user list');
+            const userList = await UserModel.find();
+            res.send(userList);
         } catch (error) {
             next(error);
         }
     },
     getUserById: async (req, res, next) => {
         try {
-            res.send('this should send user from current id');
+            const id = req.params.id;
+            if(!id) throw createError.BadRequest();
+            const user = await UserModel.findById(id);
+            if(!user) res.send('Current user does not exist in database');
+            res.send(user);
         } catch (error) {
             next(error);
         }
     },
     addUser: async (req, res, next) => {
         try {
-            res.send('this should post a new user to db');
+            const body = req.body;
+            if(!body) throw createError.BadRequest();
+            const newUser = new UserModel(body);
+            const savedUser = await newUser.save();
+            if(!savedUser) throw createError.InternalServerError();
+            res.send('User added bos!');
         } catch (error) {
             next(error);
         }
     },
     editUser: async (req, res, next) => {
         try {
-            res.send('this should edit current user data');
+            const body = req.body;
+            if(!body) throw createError.BadRequest();
+            const doesExist = await UserModel.findOne({username: body.username});
+            if(!doesExist) throw createError.InternalServerError('cannot find user to update');
+            const updatedUser = await UserModel.findOneAndUpdate({username: body.username}, body);
+            if(!updatedUser) throw createError.InternalServerError();
+            res.send('User updated bos!');
         } catch (error) {
             next(error);
         }
     },
     deleteUser: async (req, res, next) => {
         try {
-            res.send('this should delete user data');
+            const id = req.params.id;
+            if(!id) throw createError.BadRequest();
+            const doesExist = await UserModel.findById(id);
+            if(!doesExist) throw createError.InternalServerError('cannot find user to delete');
+            const deletedUser = await UserModel.findByIdAndDelete(id);
+            if(!deletedUser) throw createError.InternalServerError();
+            res.send('User deleted bos!');
         } catch (error) {
             next(error);
         }

@@ -8,13 +8,31 @@ GET http://localhost:3000/users
 GET http://localhost:3000/users/get-users
 
 ### GET user by id
-GET http://localhost:3000/users/get-user/:id
+GET http://localhost:3000/users/get-user/62bc29c4f3fc4e68a32f2f69
 
 ### GET add new user
 POST http://localhost:3000/users/add-user
+Content-Type: application/json
+
+{
+    "firstName": "Jhon",
+    "lastName": "Doe",
+    "DOB": "1999-12-31T17:00:00.000Z",
+    "username": "jhon",
+    "password": "123456"
+}
 
 ### GET edit user 
-GET http://localhost:3000/users/edit-user
+PUT http://localhost:3000/users/edit-user
+Content-Type: application/json
+
+{
+    "firstName": "Jhon edit",
+    "lastName": "Doe",
+    "DOB": "1999-12-31T17:00:00.000Z",
+    "username": "jhon",
+    "password": "123456"
+}
 
 ### GET delete user
-GET http://localhost:3000/users/delete-user/:id
+DELETE http://localhost:3000/users/delete-user/62bc2b159d5d292f8510c1a5
