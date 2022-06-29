@@ -4,17 +4,17 @@
 ### GET user root API
 GET http://localhost:3000/users
 
-### GET user root API
+### GET user list
 GET http://localhost:3000/users/get-users
 
-### GET user root API
+### GET user by id
 GET http://localhost:3000/users/get-user/:id
 
-### GET user root API
-GET http://localhost:3000/users/add-user
+### GET add new user
+POST http://localhost:3000/users/add-user
 
-### GET user root API
+### GET edit user 
 GET http://localhost:3000/users/edit-user
 
-### GET user root API
+### GET delete user
 GET http://localhost:3000/users/delete-user/:id
