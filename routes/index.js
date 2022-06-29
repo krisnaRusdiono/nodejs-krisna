@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const ctrl = require('../controller/index.controller');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.send('Hi bos!');
-});
+/* GET root API */
+router.get('/', ctrl.base);
 
 module.exports = router;

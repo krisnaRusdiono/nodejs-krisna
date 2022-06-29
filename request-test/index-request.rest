@@ -1,0 +1,4 @@
+### Request Format 
+### METHOD url
+
+GET http://localhost:3000/

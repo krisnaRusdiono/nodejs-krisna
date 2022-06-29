@@ -1,0 +1,20 @@
+### Request Format 
+### METHOD url
+
+### GET user root API
+GET http://localhost:3000/users
+
+### GET user root API
+GET http://localhost:3000/users/get-users
+
+### GET user root API
+GET http://localhost:3000/users/get-user/:id
+
+### GET user root API
+GET http://localhost:3000/users/add-user
+
+### GET user root API
+GET http://localhost:3000/users/edit-user
+
+### GET user root API
+GET http://localhost:3000/users/delete-user/:id
