@@ -44,4 +44,5 @@ Content-Type: application/json
 }
 
 ### DELETE delete user
-DELETE http://localhost:3000/users/delete-user/62bc2b159d5d292f8510c1a5
+DELETE http://localhost:3000/users/delete-user/62bc3f90431d5f08be948bff
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTY1MDQ2NzYsImV4cCI6MTY1NjU5MTA3NiwiYXVkIjoiNjJiYzNmOTA0MzFkNWYwOGJlOTQ4YmZmIiwiaXNzIjoibm9kZWpzLWtyaXNuYXJ1c2Rpb25vIn0.X_W-79Q-yWsCCfFmgBO0NK2ireUpN6frjXdMcPqA9S4

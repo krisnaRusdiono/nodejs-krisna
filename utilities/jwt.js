@@ -51,4 +51,32 @@ module.exports = {
       });
     });
   },
+  validateAt: async (req, res, next) => {
+    try {
+      const header = req.headers.authorization;
+      if (!header) throw createError.Unauthorized();
+      const bearer = header.split(" ");
+      const token = bearer[1];
+      jwt.verify(token, process.env.ATSECRET, (err, payload) => {
+        if (err) throw createError.InternalServerError(err.message);
+        next();
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+  validateRt: async (req, res, next) => {
+    try {
+      const header = req.headers.authorization;
+      if (!header) throw createError.Unauthorized();
+      const bearer = header.split(" ");
+      const token = bearer[1];
+      jwt.verify(token, process.env.RTSECRET, (err, payload) => {
+        if (err) throw createError.InternalServerError(err.message);
+        next();
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 };

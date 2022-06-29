@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../controller/users.controller');
+const {validateAt} = require('../utilities/jwt');
 
 /* GET users root */
 router.get('/', ctrl.base);
@@ -18,7 +19,7 @@ router.post('/add-user', ctrl.addUser);
 router.put('/edit-user', ctrl.editUser);
 
 /* DELETE current user */
-router.delete('/delete-user/:id', ctrl.deleteUser);
+router.delete('/delete-user/:id', validateAt, ctrl.deleteUser);
 
 /* SIMULATE Login */
 router.post('/login', ctrl.login);
