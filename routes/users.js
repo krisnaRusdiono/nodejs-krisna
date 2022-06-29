@@ -20,4 +20,7 @@ router.put('/edit-user', ctrl.editUser);
 /* DELETE current user */
 router.delete('/delete-user/:id', ctrl.deleteUser);
 
+/* SIMULATE Login */
+router.post('/login', ctrl.login);
+
 module.exports = router;

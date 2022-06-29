@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const UserModel = require('../db/user.model');
+const { signAt, signRt, parseAt } = require("../utilities/jwt");
 
 module.exports = {
     base: async (req, res, next) => {
@@ -62,6 +63,24 @@ module.exports = {
             const deletedUser = await UserModel.findByIdAndDelete(id);
             if(!deletedUser) throw createError.InternalServerError();
             res.send('User deleted bos!');
+        } catch (error) {
+            next(error);
+        }
+    },
+    login: async (req, res, next) => {
+        try {
+            const body = req.body;
+            if(!body) throw createError.BadRequest();
+            const doesExist = await UserModel.findOne({username: body.username});
+            if(!doesExist) res.send('cannot recognize your login credential');
+            const isValidPassword = await doesExist.isValidPassword(body.password);
+            if(!isValidPassword) throw createError.Unauthorized();
+            const atoken = await signAt(doesExist.id);
+            const rtoken = await signRt(doesExist.id);
+            res.send({
+                aToken: atoken,
+                rToken: rtoken
+            });
         } catch (error) {
             next(error);
         }
